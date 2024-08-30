@@ -10,14 +10,27 @@ def draw_plot():
     print(df)
 
     # Create scatter plot
-    plt.figure(figsize=(10, 6))
-    plt.scatter(df["Year"], df["CSIRO Adjusted Sea Level"], color="blue")
+    fig1, ax1 = plt.subplots(figsize=(10, 6))
+    ax1.scatter(df["Year"], df["CSIRO Adjusted Sea Level"], color="blue", label="Data")
     # Adding title and labels
-    plt.title("CSIRO Adjusted Sea Level by Year")
-    plt.xlabel("Year")
-    plt.ylabel("CSIRO Adjusted Sea Level (inches)")
+    ax1.set_title("CSIRO Adjusted Sea Level by Year")
+    ax1.set_xlabel("Year")
+    ax1.set_ylabel("CSIRO Adjusted Sea Level (inches)")
 
     # Create first line of best fit
+    # Linear regression
+    slope, intercept, r_value, p_value, std_err = linregress(
+        df["Year"], df["CSIRO Adjusted Sea Level"]
+    )
+    # Generate x values from the first year in the data to 2050
+    years_extended = list(range(df["Year"].min(), 2051))
+    # Calculate the corresponding y values for the line of best fit
+    sea_level_extended = [intercept + slope * year for year in years_extended]
+    # Plot the line of best fit
+    ax1.plot(years_extended, sea_level_extended, color="red", label="Best Fit Line")
+    # Add legend
+    ax1.legend()
+    plt.show()
 
     # Create second line of best fit
 
