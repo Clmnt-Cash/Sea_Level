@@ -46,9 +46,9 @@ def draw_plot():
     )
 
     # Labels and title
-    plt.title("CSIRO Adjusted Sea Level by Year")
+    plt.title("Rise in Sea Level")
     plt.xlabel("Year")
-    plt.ylabel("CSIRO Adjusted Sea Level (inches)")
+    plt.ylabel("Sea Level (inches)")
     plt.legend()
 
     plt.savefig("sea_level_plot.png")
